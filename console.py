@@ -10,7 +10,26 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from datetime import datetime
 
+
+def parse_value(value_str):
+    if value_str.startswith('"') and value_str.endswith('"'):
+        # Remove surrounding quotes and unescape internal quotes
+        value_str = value_str[1:-1].replace('\\"', '"')
+        # Replace underscores with spaces
+        value_str = value_str.replace('_', ' ')
+        return value_str
+    elif '.' in value_str:
+        try:
+            return float(value_str)
+        except ValueError:
+            return None
+    else:
+        try:
+            return int(value_str)
+        except ValueError:
+            return None
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -112,19 +131,47 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
         pass
-
+    
     def do_create(self, args):
-        """ Create an object of any class"""
+        """ Create an object of any class
+        Update to allow for oject creation with given parameters
+        usage: creat <Class name> <param 1> <param 2> <param 3> ...
+        parameter syntax: key=value
+        
+        create Place city_id="0001" user_id="0001" name="My_little_house"
+        number_rooms=4 number_bathrooms=2 max_guest=10 price_by_night=300
+        latitude=37.773972 longitude=-122.431297
+        """
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+
+        # split the passed arguments into tokens separated by ' '
+        tokens = args.split()
+
+        class_name = tokens[0]
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
+
+        params = {}
+        # iterate over tokens to get key=value pair
+
+        for item in tokens[1:]:
+            if '=' in item:
+                key, value = item.split('=')
+                value = parse_value(value)
+
+                if value is not None:
+                    params[key] = value
+
+        try:
+            new_instance = HBNBCommand.classes[class_name](**params)
+            storage.save()
+            print(new_instance.id)
+            storage.save()
+        except Exception as e:
+            print("Error creating instance: {}".format(e))
 
     def help_create(self):
         """ Help information for the create method """
