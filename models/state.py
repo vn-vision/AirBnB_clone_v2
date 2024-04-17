@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String
 
@@ -13,8 +13,7 @@ class State(BaseModel, Base):
     name = Column(String(128), nullable=False)
 
     # Define relationship with city
-    if storage_type == 'db':
-        cities = relationship(
+    cities = relationship(
                 'City', backref='state', cascade='all, delete-orphan')
 
     # Define getter attribute cities
