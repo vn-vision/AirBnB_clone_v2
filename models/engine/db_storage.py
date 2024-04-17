@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 
 
-class DBuStorage:
+class DBStorage:
     """
     this class manages databse storage with SQLAlchemy
     """
