@@ -16,6 +16,7 @@ class State(BaseModel, Base):
     cities = relationship(
                 'City', backref='state', cascade='all, delete-orphan')
 
+    '''
     # Define getter attribute cities
     @property
     def cities(self):
@@ -25,3 +26,4 @@ class State(BaseModel, Base):
         from models.city import City
         return [city for city in storage.all(City)
                 if city.state_id == self.id]
+    '''
