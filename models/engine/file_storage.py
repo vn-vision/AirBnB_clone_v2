@@ -10,13 +10,24 @@ class FileStorage:
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
+
         if cls:
+            if isinstance(cls, str):
+                cls = globals().get(cls)
+            if cls and issubclass(cls, BaseModel):
+                filtered = {key: value
+                            for k, v in self.__objects.items() if isinstance(
+                                v, cls)}
+                return filtered
+        return self.__objects
+        '''if cls:
             filtered = {}
             for key, value in self.__objects.items():
                 if type(value) == cls:
                     filtered[key] = value
             return filtered
         return self.__objects
+        '''
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -67,5 +78,7 @@ class FileStorage:
         # delete key
         dl_key = "{}.{}".format(obj.__class__.__name__, obj.id)
 
-        if dl_key in self.__objects:
+        try:
             del self.__objects[dl_key]
+        except AttributeError, KeyboardInterrupt:
+            pass
