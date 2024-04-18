@@ -79,5 +79,7 @@ class FileStorage:
 
         try:
             del self.__objects[dl_key]
-        except AttributeError, KeyboardInterrupt:
+        except AttributeError:
+            pass
+        except KeyboardInterrupt:
             pass
