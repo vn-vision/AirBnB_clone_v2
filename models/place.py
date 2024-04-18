@@ -13,21 +13,19 @@ class Place(BaseModel, Base):
     # create the different attributes for the Place
     """ A place to stay """
     # create foreign keys in table places referencing other models
-    city_id = Column(String(60), ForeignKey('cities.id', ondelete='CASCADE'),
-                     nullable=False)
-    user_id = Column(String(60), ForeignKey('users.id', ondelete='CASCADE'),
-                     nullable=False)
+    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
 
     # continue with other attributesYes
     name = Column(String(128), nullable=False)
-    description = Column(String(1024), nullable=True)
+    description = Column(String(1024))
     number_rooms = Column(Integer, nullable=False, default=0)
     number_bathrooms = Column(Integer, nullable=False, default=0)
     max_guest = Column(Integer, nullable=False, default=0)
     price_by_night = Column(Integer, nullable=False, default=0)
-    latitude = Column(Float, nullable=True)
-    longitude = Column(Float, nullable=True)
-    amenity_ids = []
+    latitude = Column(Float)
+    longitude = Column(Float)
+    # amenity_ids = []
 
     # define relationship between place and: user
     user = relationship('User', back_populates='places')
