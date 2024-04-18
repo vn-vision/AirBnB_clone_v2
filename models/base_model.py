@@ -24,10 +24,17 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
+<<<<<<< HEAD
 
         self.id = str(uuid.uuid4())
         self.created_at = datetime.utcnow()
         self.updated_at = datetime.utcnow()
+=======
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.utcnow()
+        self.updated_at = datetime.utcnow()
+
+>>>>>>> refs/remotes/origin/master
         if kwargs:
             for key, value in kwargs.items():
                 # check if the class has an attribute matching key

@@ -16,7 +16,12 @@ class State(BaseModel, Base):
     cities = relationship(
                 'City', backref='state', cascade='all, delete-orphan')
 
+<<<<<<< HEAD
     '''# Define getter attribute cities
+=======
+    '''
+    # Define getter attribute cities
+>>>>>>> refs/remotes/origin/master
     @property
     def cities(self):
         """ Getter attribute that returns list of city instance
@@ -24,4 +29,9 @@ class State(BaseModel, Base):
         from models import storage
         from models.city import City
         return [city for city in storage.all(City)
+<<<<<<< HEAD
                 if city.state_id == self.id]'''
+=======
+                if city.state_id == self.id]
+    '''
+>>>>>>> refs/remotes/origin/master
