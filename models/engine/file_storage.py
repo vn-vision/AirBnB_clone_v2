@@ -11,7 +11,7 @@ class FileStorage:
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
 
-        if cls:
+        '''if cls:
             if isinstance(cls, str):
                 cls = globals().get(cls)
             if cls and issubclass(cls, BaseModel):
@@ -19,15 +19,14 @@ class FileStorage:
                             for k, v in self.__objects.items() if isinstance(
                                 v, cls)}
                 return filtered
-        return self.__objects
-        '''if cls:
+        return self.__objects'''
+        if cls:
             filtered = {}
             for key, value in self.__objects.items():
-                if type(value) == cls:
+                if type(value) is cls:
                     filtered[key] = value
             return filtered
         return self.__objects
-        '''
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
