@@ -25,10 +25,10 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float)
     longitude = Column(Float)
-    # amenity_ids = []
+    amenity_ids = []
 
     # define relationship between place and: user
-    user = relationship('User', back_populates='places')
+    # user = relationship('User', back_populates='places')
 
     # :City
-    cities = relationship('City', back_populates='places')
+    # cities = relationship('City', back_populates='places')
