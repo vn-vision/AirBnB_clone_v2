@@ -20,5 +20,3 @@ class City(BaseModel, Base):
     # Create link to places
     places = relationship('Place', back_populates='cities',
                           cascade='all, delete-orphan')
-
-    # This is just to check for changes`
