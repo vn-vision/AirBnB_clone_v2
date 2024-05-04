@@ -29,10 +29,14 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.utcnow()
         self.updated_at = datetime.utcnow()
+<<<<<<< HEAD
 =======
         self.id = str(uuid.uuid4())
         self.created_at = datetime.utcnow()
         self.updated_at = datetime.utcnow()
+
+>>>>>>> refs/remotes/origin/master
+=======
 
 >>>>>>> refs/remotes/origin/master
         if kwargs:

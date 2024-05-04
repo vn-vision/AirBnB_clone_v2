@@ -54,4 +54,9 @@ class User(BaseModel, Base):
     '''
     places = relationship('Place', back_populates='user',
                           cascade='all, delete-orphan')
+<<<<<<< HEAD
+>>>>>>> refs/remotes/origin/master
+=======
+
+    reviews = relationship("Review", backref="user", cascade="delete")
 >>>>>>> refs/remotes/origin/master

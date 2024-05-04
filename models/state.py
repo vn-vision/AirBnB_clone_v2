@@ -17,9 +17,12 @@ class State(BaseModel, Base):
                 'City', backref='state', cascade='all, delete-orphan')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     '''# Define getter attribute cities
 =======
     '''
+=======
+>>>>>>> refs/remotes/origin/master
     # Define getter attribute cities
 >>>>>>> refs/remotes/origin/master
     @property
@@ -33,5 +36,8 @@ class State(BaseModel, Base):
                 if city.state_id == self.id]'''
 =======
                 if city.state_id == self.id]
+<<<<<<< HEAD
     '''
+>>>>>>> refs/remotes/origin/master
+=======
 >>>>>>> refs/remotes/origin/master
