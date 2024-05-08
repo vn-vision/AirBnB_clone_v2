@@ -6,14 +6,18 @@ folder of the AirBnB Clone repo
 
 from datetime import datetime
 from fabric.api import local
-from os.path import isdir
+from os.path import isdir, join, abspath
 
 
 def do_pack():
     """generates a tgz archive"""
     date = datetime.now().strftime("%Y%m%d%H%M%S")
-    if isdir("versions") is False:
-        local("mkdir versions")
+    versions_folder = "versions"
+    archive_name = f"web_static_{date}.tgz"
+    archive_path = join(versions_folder, archive_name)
+
+    if isdir("versions_folder") is False:
+        local("mkdir -p{}". versions)
     file_name = "versions/web_static_{}.tgz".format(date)
     local("tar -cvzf {} web_static".format(file_name))
     return file_name
