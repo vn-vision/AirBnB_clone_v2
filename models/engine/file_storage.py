@@ -70,3 +70,8 @@ class FileStorage:
 
         if dl_key in self.__objects:
             del self.__objects[dl_key]
+
+
+    def close(self):
+        ''' call reload function '''
+        self.reload(()
