@@ -1,10 +1,5 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
-<<<<<<< HEAD
 """Place class."""
-=======
-"""Defines the Place class."""
->>>>>>> refs/remotes/origin/master
 import models
 from os import getenv
 from models.base_model import Base
@@ -31,13 +26,7 @@ association_table = Table("place_amenity", Base.metadata,
 
 class Place(BaseModel, Base):
     """Represents a Place for a MySQL database.
-<<<<<<< HEAD
     Inherits from SQLAlchemy Base and links to the MySQL table places.
-=======
-
-    Inherits from SQLAlchemy Base and links to the MySQL table places.
-
->>>>>>> refs/remotes/origin/master
     Attributes:
         __tablename__ (str): The name of the MySQL table to store places.
         city_id (sqlalchemy String): The place's city id.
@@ -66,12 +55,7 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     reviews = relationship("Review", backref="place", cascade="delete")
-<<<<<<< HEAD
     amenities = relationship("Amenity", secondary="place_amenity", viewonly=False)
-=======
-    amenities = relationship("Amenity", secondary="place_amenity",
-                             viewonly=False)
->>>>>>> refs/remotes/origin/master
     amenity_ids = []
 
     if getenv("HBNB_TYPE_STORAGE", None) != "db":
@@ -97,41 +81,3 @@ class Place(BaseModel, Base):
         def amenities(self, value):
             if type(value) == Amenity:
                 self.amenity_ids.append(value.id)
-<<<<<<< HEAD
-=======
-""" Place Module for HBNB project """
-from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer, Float, ForeignKey
-from sqlalchemy.orm import relationship
-
-
-class Place(BaseModel, Base):
-
-    # create table place
-    __tablename__ = 'places'
-
-    # create the different attributes for the Place
-    """ A place to stay """
-    # create foreign keys in table places referencing other models
-    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-
-    # continue with other attributesYes
-    name = Column(String(128), nullable=False)
-    description = Column(String(1024))
-    number_rooms = Column(Integer, nullable=False, default=0)
-    number_bathrooms = Column(Integer, nullable=False, default=0)
-    max_guest = Column(Integer, nullable=False, default=0)
-    price_by_night = Column(Integer, nullable=False, default=0)
-    latitude = Column(Float)
-    longitude = Column(Float)
-    amenity_ids = []
-
-    # define relationship between place and: user
-    # user = relationship('User', back_populates='places')
-
-    # :City
-    # cities = relationship('City', back_populates='places')
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> refs/remotes/origin/master
