@@ -16,35 +16,23 @@ You must use the option strict_slashes=False in your route definition
 '''
 from flask import Flask
 from models import storage
-from flask import g
 from flask import render_template
+
 
 app = Flask(__name__)
 
-def create_app():
-    ''' request the content from the storage engines'''
-    with app.app_context():
-        storage.all()
 
 @app.route('/states_list', strict_slashes=False)
 def statesList():
     ''' display a HTML page inside the tag BODY '''
-    return render_template('7-states_list.html')
-
-def get_db():
-    ''' ensure the database is db '''
-    if 'db' not in g:
-        g.db = connect_to_database()
-
-        return g.db
+    states = storage.all('State')
+    sorted_states = sorted(states.values(), key=lambda state: state.name)
+    return render_template('7-states_list.html', states=sorted_states)
 
 @app.teardown_appcontext
 def tearDown(exception):
     ''' reset after session '''
-    db = g.pop('db', None)
-
-    if db is not None:
-        storage.close()
+    storage.close()
 
 
 if __name__ == '__main__':
